@@ -49,7 +49,7 @@ Find a single object by id. Query by mongo model Filters.
 	Mono<Instance> instance = instances.find(and(eq("_id", new ObjectId("55e65373e4b018aebdde9d2c")))).first();
 ```
 
-Find a single object by id. Query by rongo biding
+Find a single object by id. Query by rongo binding.
 
 ```java
 
@@ -91,7 +91,8 @@ To produce nmote-rongo.jar you will need apache maven installed. Run:
 > mvn clean package
 
 
-References:
+References
+----------
 
 * [mongo-jackson-codec](https://github.com/ylemoigne/mongo-jackson-codec)
 * [jongo](https://github.com/bguerout/jongo)
