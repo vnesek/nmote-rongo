@@ -1,14 +1,16 @@
 nmote-rongo
-=====================================
+===========
 
-Java 1.8 reactive driver for mongodb
+*Java 1.8 reactive driver for mongodb*
 
 Rongo is mashup of mostly code transplated from jongo and mongo-jackson-codec with a bit of
 mongo async driver adapted to reactive streams in a mix.
 
-I really like what jongo is doing with jackson + bson4jackson searlizing mongo documents.
-Adopting jongo to new mongo async driver and reactive streams seamed really hard, so I
-repackaged important parts.
+I really like what jongo is doing with jackson + bson4jackson serializing mongo documents.
+Adopting existing jongo to new mongo async driver and reactive streams seamed really hard, so I
+repackaged important bits.
+
+*Warning:* work-in-progress, API isn't stable nor complete.
 
 Features
 --------
