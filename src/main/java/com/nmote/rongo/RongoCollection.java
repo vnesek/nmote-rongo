@@ -119,20 +119,20 @@ public class RongoCollection<T> {
         return collection.getWriteConcern();
     }
 
-    public Mono<Void> insertMany(InsertManyOptions options, List<T> documents) {
-        return Rongo.mono(c -> collection.insertMany(documents, options, c));
+    public Mono<Boolean> insertMany(InsertManyOptions options, List<T> documents) {
+        return Rongo.monoVoid(c -> collection.insertMany(documents, options, c));
     }
 
-    public Mono<Void> insertMany(List<T> documents) {
-        return Rongo.mono(c -> collection.insertMany(documents, c));
+    public Mono<Boolean> insertMany(List<T> documents) {
+        return Rongo.monoVoid(c -> collection.insertMany(documents, c));
     }
 
-    public Mono<Void> insertOne(InsertOneOptions options, T document) {
-        return Rongo.mono(c -> collection.insertOne(document, options, c));
+    public Mono<Boolean> insertOne(InsertOneOptions options, T document) {
+        return Rongo.monoVoid(c -> collection.insertOne(document, options, c));
     }
 
-    public Mono<Void> insertOne(T document) {
-        return Rongo.mono(c -> collection.insertOne(document, c));
+    public Mono<Boolean> insertOne(T document) {
+        return Rongo.monoVoid(c -> collection.insertOne(document, c));
     }
 
     public Mono<UpdateResult> replaceOne(Bson filter, T replacement) {

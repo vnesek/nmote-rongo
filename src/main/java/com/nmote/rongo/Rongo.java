@@ -93,15 +93,38 @@ public class Rongo {
         public void onResult(T result, Throwable t) {
             if (t != null) {
                 sink.error(t);
-            } else if (result != null) {
-                sink.success(result);
             } else {
-                sink.success();
+                sink.success(result);
             }
         }
 
         private MonoSink<T> sink;
         private final Consumer<SingleResultCallback<T>> action;
+    }
+
+    private static class MonoCallbackVoid implements SingleResultCallback<Void>, Consumer<MonoSink<Boolean>> {
+
+        public MonoCallbackVoid(Consumer<SingleResultCallback<Void>> action) {
+            this.action = action;
+        }
+
+        @Override
+        public void accept(MonoSink<Boolean> sink) {
+            this.sink = sink;
+            action.accept(this);
+        }
+
+        @Override
+        public void onResult(Void result, Throwable t) {
+            if (t != null) {
+                sink.error(t);
+            } else {
+                sink.success(Boolean.TRUE);
+            }
+        }
+
+        private MonoSink<Boolean> sink;
+        private final Consumer<SingleResultCallback<Void>> action;
     }
 
     public static Document bind(Map<String, Object> template, Map<String, Object> parameters) {
@@ -180,6 +203,10 @@ public class Rongo {
 
     public static <T> Mono<T> mono(Consumer<SingleResultCallback<T>> action) {
         return Mono.create(new MonoCallbackSink<>(action));
+    }
+
+    public static Mono<Boolean> monoVoid(Consumer<SingleResultCallback<Void>> action) {
+        return Mono.create(new MonoCallbackVoid(action));
     }
 
     private static void bindInternal(Map<String, Object> template, Map<String, Object> parameters,
